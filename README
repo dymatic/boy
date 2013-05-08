@@ -1,4 +1,4 @@
-===Intro:Boy
+===Intro:Boy is a ManPage lookup service
 Boy is a replacement for UNIX's man command. Man, for non-unixers or graphical-only users, is manual documentation lookup. It can look up arbitrary information from files with the format of ===Type:OptText and the text below it, with the last line ending in a dash.
 -
 
