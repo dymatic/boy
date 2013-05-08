@@ -1,0 +1,15 @@
+===Intro:Boy
+Boy is a replacement for UNIX's man command. Man, for non-unixers or graphical-only users, is manual documentation lookup. It can look up arbitrary information from files with the format of ===Type:OptText and the text below it, with the last line ending in a dash.
+-
+
+===Standards
+Usually, a boy file will consist of the following headers: Intro:NameOfProgram, Command Line Options, Files, License, Extra (optional), Authors
+
+For non-program documentation, do whatever you need to for the documentation at hand.
+-
+
+===Plans:Unfunished
+There is one programmer working on this in his spare time. Over the weekend a bulk of this should get written, enough to be put into moderate use. I am planning to run the features on a test file, build the command-line-options, and then two weekends from now allow it to handle directories (thinking /usr/share/boy) for the manual documenation.
+-
+
+===License:BJLPL-
