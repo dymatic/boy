@@ -48,6 +48,8 @@ module LibHaskell.LibLists(
  ,accuracy
  ,excedes
  ,ses
+ ,before
+ ,nav
 ) where
 
 -- For general lists not biased to a type.
@@ -104,7 +106,7 @@ inFst :: (Eq a) => a -> [(a,b)] -> Bool
 inFst a xs = a `elem` (map fst xs)
 
 --Associative Tupple Lookup
-look :: (Eq a) => a -> [(a,a)] -> a
+look :: (Eq a) => a -> [(a,b)] -> b
 look t xs = snd $ grab (filter (\(a,b) -> a == t) xs) 
 
 --Apply a predicate until its false. The parameter that trips it does not get added.
@@ -161,7 +163,9 @@ dropAfter (x:xs) b
 --Get the information between two delimiters.
 between :: (Eq a) =>  [a] -> (a,a) -> [a]
 between [] _ = []
-between xs (a,b) = spay $ dropAfter (after xs a) b
+between xs (a,b)
+  | a `elem` xs = spay $ dropAfter (after xs a) b
+  | otherwise = xs
 
 --Get rid of everything between two delimiters, not including the delimiters.
 removeBetween ::(Eq a) =>  [a] -> (a,a) -> [a]
@@ -331,3 +335,12 @@ excedes a x c = (occurences a x) >= c
 
 ses ::(Eq a) => [a] -> [a] -> Bool
 ses a b = and [((grab a) == (grab b)),((pop a)==(pop b))]
+
+before :: (Eq a) => [a] -> a -> [a]
+before x y = filterBreak (/=y) x
+
+nav :: (a -> Bool) -> [a] -> [Int]
+nav f x = positions (map f x) True
+
+goUntil :: (Eq a) => [a] -> (Int,a) -> [a]
+goUntil x (a,b) = before (strt x a) b
