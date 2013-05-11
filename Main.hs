@@ -1,5 +1,4 @@
 import System.IO
-
 import LibHaskell.LibLists
 import ProjectSpecific
 import System.Process
@@ -7,16 +6,24 @@ import System.Exit
 import System.Environment
 
 main = do
-	(b:a:_) <- getArgs
-	boyFile <- openFile a ReadMode
-	boyText <- hGetContents boyFile
-
-	let rspnc = case b of
-						"titles" -> (specTitles (lines boyText))
-						"descriptions" -> (compress (intersperse (allDescriptions (lines boyText)) ["\n"]))
-						otherwise -> [""]
-
-	let d = (if (null $ grab rspnc) then
-								(getInfo (lines boyText) b)
-								else rspnc)
+	args <- getArgs
+	if ((length args) == 1) then do
+							boyFile <- openFile (at args 0) ReadMode
+							boyText <- hGetContents boyFile
+							(mapM putStrLn (lines boyText))
+							exitSuccess
+					 else
+							return ()
+	let (a:b:_) = take 2 args
+	realOptionBoyFile  <- openFile b ReadMode
+	realOptionBoyText <- hGetContents realOptionBoyFile
+	let response = case a of
+					"titles" -> (specTitles (lines realOptionBoyText))
+					"descriptions" -> (compress (intersperse (allDescriptions (lines (realOptionBoyText))) ["\n"]))
+					otherwise -> [""]
+	let d = if (null $ grab response) then
+							(getInfo (lines realOptionBoyText) a)
+						      else
+							 response
 	mapM putStrLn d
+					 
