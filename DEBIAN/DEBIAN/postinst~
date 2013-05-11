@@ -1,0 +1,4 @@
+#!/bin/bash
+ldconfig
+mkdir $HOME/.parrotBot
+echo "/etc/parrotBot/learn" > $HOME/.parrotBot/config

@@ -1,0 +1,9 @@
+Package: boy
+Version: 1.0.0
+Architecture: amd64
+Maintainer: Norton "dymatic" Jenkins <dominantshoe@gmail.com>
+Installed-Size: 1000
+Depends: ghc
+Section: utilities
+Priority: optional
+Description: Boy is a replacement for the Unix man utility. Right now, instead of displaying a curses interface it runs with command line options.

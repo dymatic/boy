@@ -50,6 +50,8 @@ module LibHaskell.LibLists(
  ,ses
  ,before
  ,nav
+ ,compress
+ ,intersperse
 ) where
 
 -- For general lists not biased to a type.
@@ -223,6 +225,7 @@ pop (_:xs) = xs
 
 --Grab the first element of a list.
 grab :: [a] -> a
+grab [] = error "Empty List supplied to Grab!"
 grab [x] = x
 grab (x:_) = x
 
@@ -344,3 +347,11 @@ nav f x = positions (map f x) True
 
 goUntil :: (Eq a) => [a] -> (Int,a) -> [a]
 goUntil x (a,b) = before (strt x a) b
+
+compress :: [[a]] -> [a]
+compress [] = []
+compress (x:xs) = x ++ compress xs
+
+intersperse :: [a] -> a -> [a]
+intersperse [] _ = []
+intersperse (x:xs) y = x:y: intersperse xs y

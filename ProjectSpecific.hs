@@ -2,6 +2,8 @@ module ProjectSpecific(
 	titles
   , descriptions
   , allDescriptions
+  , getInfo
+  , specTitles
 	) where
 
 import LibHaskell.LibLists
@@ -32,4 +34,13 @@ twd x = sew (titles x) (allDescriptions x)
 
 describe :: [String] -> String -> [String]
 describe x y = look y (twd x) 
+
+getInfo :: [String] -> String -> [String]
+getInfo allLines title = look title (twd allLines)
+
+specTitles :: [String] -> [String]
+specTitles [] = []
+specTitles (x:xs)
+	| (x `contains` "===") = (afterList x "===") :  specTitles xs
+	| otherwise = specTitles xs
 

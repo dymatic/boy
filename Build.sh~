@@ -12,6 +12,3 @@ cp README ~/Code/boy/DEBIAN/usr/share/doc/boy/
 
 fakeroot dpkg -b ./DEBIAN
 dpkg-name *.deb
-
-git add *
-git add -u
