@@ -11,7 +11,7 @@ import LibHaskell.LibLists
 titles :: [String] -> [String]
 titles [] = []
 titles (x:xs)
-	| x `contains` "===" = (before (afterList x "===") ':'):titles xs
+	| (take 5 x) `contains` "===" = (before (afterList x "===") ':'):titles xs
 	| otherwise = titles xs
 
 descriptions :: [String] -> [String]
@@ -41,6 +41,6 @@ getInfo allLines title = look title (twd allLines)
 specTitles :: [String] -> [String]
 specTitles [] = []
 specTitles (x:xs)
-	| (x `contains` "===") = (afterList x "===") :  specTitles xs
+	| ((take 5 x) `contains` "===") = (afterList x "===") :  specTitles xs
 	| otherwise = specTitles xs
 
