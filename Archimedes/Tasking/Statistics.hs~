@@ -1,0 +1,12 @@
+module Archimedes.Tasking.Statistics(
+    relevancy
+  , isSimilar) where
+
+import Archimedes.Sequence.Manipulate
+
+-- LOCAL FUNCTIONS
+refPos :: [a] -> [b] -> a -> b
+refPos a b c = b !! (pos a c)
+
+score :: [(a -> a -> Bool)] -> a -> a -> Int
+score fl t1 t2 = count $ [x | x <- fl, (fl t1 t2)] True

@@ -6,7 +6,15 @@ module ProjectSpecific(
   , specTitles
 	) where
 
-import LibHaskell.LibLists
+import Archimedes.Sequence.Manipulate
+import Archimedes.Sequence.Clarify
+import Archimedes.Sequence.Functional
+
+look :: (Eq a) => [(a,b)] -> a -> b
+look [] _ = error "Not in list"
+look ((a,b):xs) c
+  | a == c = b
+  | otherwise = look xs c
 
 titles :: [String] -> [String]
 titles [] = []
@@ -27,16 +35,16 @@ specpos a y
 
 allDescriptions :: [String] -> [[String]]
 allDescriptions [] = []
-allDescriptions a@(x:xs) = rm (descriptions a : (allDescriptions (strt xs (specpos xs "-")))) [] 
+allDescriptions a@(x:xs) = rm (descriptions a : (allDescriptions (sub xs (specpos xs "-")))) [] 
 
 twd :: [String] -> [(String,[String])]
-twd x = sew (titles x) (allDescriptions x)
+twd x = zip (titles x) (allDescriptions x)
 
 describe :: [String] -> String -> [String]
-describe x y = look y (twd x) 
+describe x y = look (twd x) y 
 
 getInfo :: [String] -> String -> [String]
-getInfo allLines title = look title (twd allLines)
+getInfo allLines title = look (twd allLines) title
 
 specTitles :: [String] -> [String]
 specTitles [] = []

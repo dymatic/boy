@@ -5,10 +5,10 @@ find . -name "*.o" -exec rm -f '{}' +
 find . -name "*.hi" -exec rm -f '{}' +
 
 rm *.deb
-rm ~/Code/boy/DEBIAN/usr/share/doc/boy/README
+rm ./DEBIAN/usr/share/doc/boy/README
 
-cp boy ~/Code/boy/DEBIAN/usr/bin
-cp README ~/Code/boy/DEBIAN/usr/share/doc/boy/
+cp boy ./DEBIAN/usr/bin
+cp README ./DEBIAN/usr/share/doc/boy/
 
 fakeroot dpkg -b ./DEBIAN
 dpkg-name *.deb

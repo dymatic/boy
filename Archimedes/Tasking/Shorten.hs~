@@ -1,0 +1,5 @@
+module shorten(
+    mass
+  , unmass) where
+
+mass :: String -> String
